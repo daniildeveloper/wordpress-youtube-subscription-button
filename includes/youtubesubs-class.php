@@ -39,7 +39,7 @@ class YoutubeSubs_Widget extends WP_Widget {
         }
 
         // widget content output
-        echo '<div class="g-ytsubscribe" data-channelid="UCrFXMExlL2X016Pa_e2o0xw" data-layout="full" data-count="default"></div>';
+        echo '<div class="g-ytsubscribe" data-channelid="' . $instance['channel']. '" data-layout="'. $instance['layout'].'" data-count="' . $instance['count']. '"></div>';
         // end widget content output
 
 
@@ -76,6 +76,9 @@ class YoutubeSubs_Widget extends WP_Widget {
      **/
     function form( $instance ) {
         $title = !empty($instance['title']) ? $instance['title'] : esc_html__('New title', 'yts-domain');
+        $channel = !empty($instance['channel']) ? $instance['channel'] : esc_html__('UCrFXMExlL2X016Pa_e2o0xw', 'yts-domain');
+        $layout = !empty($instance['layout']) ? $instance['layout'] : 'Default';
+        $count= !empty($instance['count']) ? $instance['count'] : 'Default';
         ?>
 
         <!-- TITLE -->
@@ -87,10 +90,69 @@ class YoutubeSubs_Widget extends WP_Widget {
             id="<?php echo esc_attr($this->get_field_id('title') ); ?>" 
             class="widefat" 
             type="text" 
-            value="<?php echo esc_attr('title') ?>"
+            value="<?php echo esc_attr($title) ?>"
             name="<?php echo esc_attr($this->get_field_name('title')) ?>">
         </p>
         <!-- END TITLE -->
+
+
+        <!-- CHANNELL -->
+        <p>
+          <label for="<?php echo esc_attr($this->get_field_id('channel') ); ?>">
+            <?php esc_attr_e('Channel:', 'yts-domain') ?>
+          </label>
+          <input 
+            id="<?php echo esc_attr($this->get_field_id('channel') ); ?>" 
+            class="widefat" 
+            type="text" 
+            value="<?php echo esc_attr($channel) ?>"
+            name="<?php echo esc_attr($this->get_field_name('channel')) ?>">
+        </p>
+        <!-- END CHANNELL -->
+
+        <!-- layout-->
+        <p>
+          <label for="<?php echo esc_attr($this->get_field_id('layout') ); ?>">
+            <?php esc_attr_e('Count:', 'yts-domain') ?>
+          </label>
+          <select 
+            id="<?php echo esc_attr($this->get_field_id('layout') ); ?>" 
+            class="widefat"
+            name="<?php echo esc_attr($this->get_field_name('layout')) ?>">
+            
+            <option value="default" <?php echo ($layout == 'default') ? 'selected' : ''; ?> > 
+              Default
+            </option>
+
+            <option value="full" <?php echo ($layout == 'full') ? 'selected' : ''; ?> > 
+              Full
+            </option>
+
+          </select>
+        </p>
+        <!-- END layout -->
+
+        <!-- count-->
+        <p>
+          <label for="<?php echo esc_attr($this->get_field_id('count') ); ?>">
+            <?php esc_attr_e('Layout:', 'yts-domain') ?>
+          </label>
+          <select 
+            id="<?php echo esc_attr($this->get_field_id('count') ); ?>" 
+            class="widefat"
+            name="<?php echo esc_attr($this->get_field_name('count')) ?>">
+            
+            <option value="default" <?php echo ($count == 'default') ? 'selected' : ''; ?> > 
+              Default
+            </option>
+
+            <option value="hidden" <?php echo ($count == 'full') ? 'selected' : ''; ?> > 
+              Hidden
+            </option>
+
+          </select>
+        </p>
+        <!-- END count -->
 
         <?php
     }
