@@ -39,7 +39,7 @@ class YoutubeSubs_Widget extends WP_Widget {
         }
 
         // widget content output
-        echo "Hello from YTS widget";
+        echo '<div class="g-ytsubscribe" data-channelid="UCrFXMExlL2X016Pa_e2o0xw" data-layout="full" data-count="default"></div>';
         // end widget content output
 
 
